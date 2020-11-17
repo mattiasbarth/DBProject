@@ -1,7 +1,7 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
-from ..db import Base, engine, session
+from ..db import Base
 
 
 class CustomerType(Base):
@@ -10,6 +10,8 @@ class CustomerType(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(45), nullable=False)
+
+    customers = relationship('Customer', back_populates='customertypes')  # Todo: Use singular?
 
     def __repr__(self):
         pass
