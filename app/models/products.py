@@ -1,7 +1,6 @@
-from ..db import Base
+from db import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, types
 from sqlalchemy.orm import relationship
-import sqlalchemy
 
 
 class Product(Base):
@@ -17,12 +16,12 @@ class Product(Base):
     lowest_amount = Column(Integer, nullable=False)
     automatic_order_number = Column(Integer, nullable=False)
     expected_delivery_date = Column(types.Date)
-    manufacturer_id = Column(Integer, ForeignKey("partners.id"), nullable=False)
-    supplier_id = Column(Integer, ForeignKey("partners.id"), nullable=False)
+    manufacturer_id = Column(Integer, ForeignKey("partners.id"))
+    supplier_id = Column(Integer, ForeignKey("partners.id"))
 
-    manufacturer = relationship("Partners")
-    supplier = relationship("Partners")
-
+    manufacturer = relationship("Partner", back_populate="products")
+    supplier = relationship("Partner", back_populate="products")
+    car_models = relationship("CarModel", secondary="matching_parts")
 
     def __repr__(self):
         return f"{self.name} - {self.description}. Lagerplats: {self.inventory_id}. Lagerantal: {self.stock}. Inpris: "\

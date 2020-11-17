@@ -1,6 +1,9 @@
-def main():
-    pass
+from db import Base
+from sqlalchemy import Column, Integer, ForeignKey
 
 
-if __name__ == "__main__":
-    main()
+class MatchingProduct(Base):
+    __tablename__ = "matching_products"
+
+    product_id = Column(Integer, ForeignKey("product.id"), primary_key=True)
+    car_model_id = Column(Integer, ForeignKey("car_models.id"), primary_key=True)

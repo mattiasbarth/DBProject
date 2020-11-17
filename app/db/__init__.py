@@ -1,8 +1,8 @@
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from .settings import *
 
-engine = sqlalchemy.create_engine('sqlite:///projekt.sqlite')
 
 Base = declarative_base()
 Session = sessionmaker()

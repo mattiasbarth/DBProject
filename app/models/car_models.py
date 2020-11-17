@@ -1,4 +1,5 @@
-from ..db import Base
+from sqlalchemy.orm import relationship
+from db import Base
 from sqlalchemy import Column, Integer, String
 
 
@@ -9,6 +10,9 @@ class CarModel(Base):
     manufacturer = Column(String(45), nullable=False)
     model = Column(String(45), nullable=False)
     year_model = Column(String(4), nullable=False)
+
+    products = relationship("Products", secondary="matching_parts")
+    customer = relationship("Customer", secondary="customer_cars")
 
     def __repr__(self):
         return f"{self.manufacturer} {self.model} ({self.year_model})"
