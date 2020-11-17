@@ -10,8 +10,5 @@ class Orderered_product(Base):
     product_id = Column(Integer, ForeignKey('products.id'), primary_key=True)
     product_amount = Column(Integer, nullable=False)
 
-    order = relationship('Order', back_populates='ordered_products')
-    product = relationship('Product')
-
     def __repr__(self):
         pass
