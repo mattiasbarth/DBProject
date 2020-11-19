@@ -1,8 +1,8 @@
-from db import Base, engine, session
-from models.stores import Store
-from models.employees import Employee
-from models.orderedproducts import Orderered_product
-from models.orders import Order
+from Data.db import Base, engine
+from Data.models.stores import Store
+from Data.models.employees import Employee
+from Data.models.orderedproducts import Orderered_product
+from Data.models.orders import Order
 
 
 def main():
@@ -11,6 +11,7 @@ def main():
     employee = Employee()
     order = Order()
     ordereredproduct = Orderered_product()
+
 
 if __name__ == '__main__':
     main()
