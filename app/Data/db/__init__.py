@@ -1,7 +1,4 @@
-import sqlalchemy
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from db.settings import *
+from Data.db import *
 
 engine = sqlalchemy.create_engine(f'mysql+mysqlconnector://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}')
 
