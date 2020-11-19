@@ -19,8 +19,7 @@ class Product(Base):
     manufacturer_id = Column(Integer, ForeignKey("partners.id"), ondelete="Set Null", onupdate="Cascade")
     supplier_id = Column(Integer, ForeignKey("partners.id"), ondelete="Set Null", onupdate="Cascade")
 
-    manufacturer = relationship("Partner", back_populate="products")
-    supplier = relationship("Partner", back_populate="products")
+    partners = relationship("Partner", back_populate="products")
     car_models = relationship("CarModel", secondary="matching_parts")
 
     def __repr__(self):
