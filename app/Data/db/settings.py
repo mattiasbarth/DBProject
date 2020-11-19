@@ -1,5 +1,0 @@
-USER = 'root'
-PASSWORD = 'Vi24003915'
-HOST = 'localhost'
-PORT = '3306'
-DATABASE = 'tardis'
