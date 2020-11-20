@@ -12,7 +12,7 @@ from Data.models.carmodels import CarModel
 # from Data.models.partners import Partner
 # from Data.models.stores import Store
 # from Data.models.orderedproducts import OrderedProduct
-from Data.models.matching_products import matching_products
+from Data.models.matching_parts import matching_products
 
 
 def main():
