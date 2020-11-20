@@ -11,7 +11,7 @@ from models.carmodels import CarModel
 # from models.partners import Partner
 # from models.stores import Store
 # from models.orderedproducts import OrderedProduct
-from models.matchingparts import matching_products
+from models.matching_products import matching_products
 
 
 def main():
