@@ -14,13 +14,9 @@ class Store(Base):
     city = Column(String(45))
     phone = Column(String(25), nullable=False)
     email = Column(String(100), nullable=False)
-
-    employees = relationship('Employee', back_populate='stores')
+    
+    employees = relationship('Employee', back_populates='stores')
     orders = relationship('Order', back_populates='stores')
 
     def __repr__(self):
         return f"Butik {self.name} ({self.id})"
-
-
-
-

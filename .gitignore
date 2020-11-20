@@ -1,3 +1,8 @@
+temp*
+temp.py
+
+*cache*
 .idea/
 venv/
-app/db/settings*
+app/Data/db/settings.*
+app/Data/db/settings*
