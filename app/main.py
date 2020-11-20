@@ -1,31 +1,20 @@
 from Data.db import Base, engine
-
 from Data.models.products import Product
-from Data.models.carmodels import CarModel
-# from Data.models.contactpersons import ContactPerson
-# from Data.models.customercar import CustomerCar
-# from Data.models.customers import Customer
-# from Data.models.customertypes import CustomerType
-# from Data.models.employees import Employee
-# from Data.models.orders import Order
-# from Data.models.partnertypes import PartnerType
-# from Data.models.partners import Partner
-# from Data.models.stores import Store
-# from Data.models.orderedproducts import OrderedProduct
-from Data.models.matching_parts import matching_products
-
+from Data.models.car_models import CarModel
+from Data.models.contact_persons import ContactPerson
+from Data.models.customer_car import CustomerCar
+from Data.models.customers import Customer
+from Data.models.customer_types import CustomerType
+from Data.models.employees import Employee
+from Data.models.orders import Order
+from Data.models.partner_types import PartnerType
+from Data.models.partners import Partner
+from Data.models.stores import Store
+from Data.models.ordered_products import OrderedProduct
+from Data.models.matching_parts import matching_parts
 
 def main():
     Base.metadata.create_all(engine)
-    # contactperson = ContactPerson()
-    # customercar = CustomerCar()
-    # customers = Customer()
-    # customertype = CustomerType()
-    # employee = Employee()
-    # order = Order()
-    # orderedproduct = OrderedProduct()
-    # store = Store()
-
 
 if __name__ == '__main__':
     main()
