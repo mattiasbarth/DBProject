@@ -14,6 +14,7 @@ class Partner(Base):
     city = Column(String(45), nullable=False)
     phone = Column(String(45), nullable=False)
     email = Column(String(100), nullable=True)
+
     contact_person_id = Column(Integer, ForeignKey('contact_persons.id', ondelete='Set Null', onupdate='Cascade'))
     partner_type_id = Column(Integer, ForeignKey('partner_types.id', ondelete='Restrict', onupdate='Cascade'))
 

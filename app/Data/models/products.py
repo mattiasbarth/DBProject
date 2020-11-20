@@ -16,9 +16,9 @@ class Product(Base):
     lowest_amount = Column(Integer, nullable=False)
     automatic_order_number = Column(Integer, nullable=False)
     expected_delivery_date = Column(types.Date)
+
     manufacturer_id = Column(Integer, ForeignKey("partners.id", ondelete="Set Null", onupdate="Cascade"))
     supplier_id = Column(Integer, ForeignKey("partners.id", ondelete="Set Null", onupdate="Cascade"))
-
     partners = relationship("Partner", back_populates="products")
     car_models = relationship("CarModel", secondary="matching_parts")
 
