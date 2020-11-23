@@ -1,6 +1,6 @@
 from Controllers.car_model_controller import *
 
-def admin_car_model_menu():
+def car_model_menu():
     while True:
         print("BILMODELLER".rjust(13))
         print("-----------------")

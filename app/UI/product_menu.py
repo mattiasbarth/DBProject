@@ -1,6 +1,6 @@
 from Controllers.product_controller import *
 
-def admin_products_menu():
+def products_menu():
     while True:
         print("PRODUKTER".rjust(13))
         print("-----------------")
@@ -30,3 +30,4 @@ def admin_products_menu():
             #main_menu()
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
+

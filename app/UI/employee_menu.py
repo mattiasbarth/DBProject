@@ -1,6 +1,6 @@
 from Controllers.employee_controller import *
 
-def admin_employees_menu():
+def employees_menu():
     while True:
         print("ANSTÄLLDA".rjust(13))
         print("-----------------")
@@ -26,3 +26,5 @@ def admin_employees_menu():
             #main_menu()
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
+
+employees_menu()
