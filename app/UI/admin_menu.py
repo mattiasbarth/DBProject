@@ -1,6 +1,9 @@
+from UI.store_menu import store_menu
+
+
 def admin_menu():
     while True:
-        print("Admin")
+        print("ADMIN")
         print("----------------------")
         print("1. Butiker")
         print("2. Anställda")
@@ -15,6 +18,6 @@ def admin_menu():
         elif selected == "3":
             order_menu()
         elif selected == "10":
-            main_menu()
+            break
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")

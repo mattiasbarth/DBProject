@@ -16,9 +16,9 @@ class Order(Base):
     comment = Column(String(150))
 
     store = relationship('Store', back_populates='orders')
-    employee = relationship('Employee', back_populates='orders')
+    employee = relationship('Employee')
     customer = relationship('Customer', back_populates='orders')
-    products = relationship('Products', secondary='ordered_products')
+    products = relationship('Product', secondary='ordered_products')
 
     def __repr__(self):
         pass
