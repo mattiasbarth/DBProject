@@ -1,3 +1,4 @@
+from UI.store_menu import store_menu
 from UI.car_model_menu import car_model_menu
 from UI.employee_menu import employees_menu
 from UI.product_menu import products_menu
@@ -5,7 +6,7 @@ from UI.product_menu import products_menu
 
 def admin_menu():
     while True:
-        print("Admin")
+        print("ADMIN")
         print("----------------------")
         print("1. Butiker")
         print("2. Anställda")
