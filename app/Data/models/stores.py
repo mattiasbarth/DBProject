@@ -19,4 +19,4 @@ class Store(Base):
     orders = relationship('Order', back_populates='store')
 
     def __repr__(self):
-        return f"Butik {self.name} ({self.id})"
+        return f"{self.name}"

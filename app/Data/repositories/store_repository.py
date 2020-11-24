@@ -7,7 +7,7 @@ def search_store(keyword):
 
 
 def main():
-    keyword = "Butik"
+    keyword = "buf"
     store = session.query(Store).filter(Store.name.like(f'%{keyword}%')).all()
     print(store)
 
