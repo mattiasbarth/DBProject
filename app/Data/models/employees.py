@@ -18,4 +18,4 @@ class Employee(Base):
     store = relationship('Store', foreign_keys=[store_id], post_update=True, back_populates='employees')
 
     def __repr__(self):
-        pass
+        return self.name

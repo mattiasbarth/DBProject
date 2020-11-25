@@ -1,8 +1,27 @@
 from Data.models.employees import Employee
+from Data.models.stores import Store
 from Data.db import session
 
-def find_employee(search):
-    print(search)
+
+def find_employees(search):
+    return session.query(Employee).filter(Employee.name.like(f'%{search}%')).all()
+
 
 def add_employee(e):
-    print(e)
+    store_id, name, phone, email, job_title = e
+    new_employee = Employee(store_id=store_id, name=name, phone=phone, email=email, job_title=job_title)
+    session.add(new_employee)
+    session.commit()
+
+
+def remove_employee(chosen_employee):
+    session.delete(chosen_employee)
+    session.commit()
+
+
+def save_changes(_):
+    session.commit()
+
+
+def existing_store(store_id):
+    return session.query(Store).filter(Store.id.like(f'%{store_id}%')).all()
