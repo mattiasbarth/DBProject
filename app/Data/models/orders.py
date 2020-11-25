@@ -1,3 +1,4 @@
+from sqlalchemy.sql import functions
 from sqlalchemy.orm import relationship
 from ..db import Base
 from sqlalchemy import Column, Integer, String, TIMESTAMP, ForeignKey
@@ -11,7 +12,7 @@ class Order(Base):
     employee_id = Column(Integer, ForeignKey('employees.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Employees
     store_id = Column(Integer, ForeignKey('stores.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Stores
 
-    date_created = Column(TIMESTAMP, nullable=False)  # TODO
+    date_created = Column(TIMESTAMP, nullable=False, default=functions.current_timestamp)
     status = Column(String(45), nullable=False)
     comment = Column(String(150))
 
