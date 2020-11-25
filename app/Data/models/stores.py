@@ -3,6 +3,7 @@ from ..db import Base
 from sqlalchemy import Column, Integer, String
 import app.Data.models
 
+
 class Store(Base):
     __tablename__ = "stores"
 
@@ -19,4 +20,4 @@ class Store(Base):
     orders = relationship('Order', back_populates='store')
 
     def __repr__(self):
-        return f"Butik {self.name} ({self.id})"
+        return f"{self.name}"
