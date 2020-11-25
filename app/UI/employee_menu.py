@@ -18,30 +18,38 @@ def edit_employee(chosen_employee):
         if selected == "1":
             chosen_employee.name = input("Ange nytt namn: ")
             ec.save_changes(chosen_employee)
+            changed_string = ec.save_changes(chosen_employee)
+            print(changed_string)
 
         elif selected == "2":
             chosen_employee.name = input("Ange ny butik (Ange butikens id): ")
             ec.save_changes(chosen_employee)
+            changed_string = ec.save_changes(chosen_employee)
+            print(changed_string)
 
         elif selected == "3":
             chosen_employee.name = input("Ange nytt telefonnummer: ")
             ec.save_changes(chosen_employee)
+            changed_string = ec.save_changes(chosen_employee)
+            print(changed_string)
 
         elif selected == "4":
             chosen_employee.name = input("Ange ny mail: ")
             ec.save_changes(chosen_employee)
+            changed_string = ec.save_changes(chosen_employee)
+            print(changed_string)
 
         elif selected == "5":
             chosen_employee.name = input("Ange ny jobtitel: ")
             ec.save_changes(chosen_employee)
+            changed_string = ec.save_changes(chosen_employee)
+            print(changed_string)
 
         elif selected == "6":
             break
         else:
             print("Felaktig inmatning")
 
-        changed_string = ec.save_changes(chosen_employee)
-        print(changed_string)
 
 
 def remove_employee(chosen_employee):
@@ -146,3 +154,5 @@ def employees_menu():
             break
         else:
             print("Felaktig inmatning")
+
+employees_menu()
