@@ -78,39 +78,37 @@ def edit_store(store):
         print(f"4. Stad: {store.city}")
         print(f"5. Telefonnummer: {store.phone}")
         print(f"6. Email: {store.email}")
+        print(f"7. Avbryt")
         print("Vilken rad vill du redigera?")
 
         edit_line = input("> ")
 
         if edit_line == "1":
-            new_value = input("Ange nytt namn: ")
-            store.name = new_value
-            cs.store_changes(store)
+            store.name = input("Ange nytt namn: ")
+            print(cs.store_changes(store))
 
         elif edit_line == "2":
-            new_value = input("Ange ny gatuadress: ")
-            store.street_address = new_value
-            cs.store_changes(store)
+            store.street_address = input("Ange ny gatuadress: ")
+            print(cs.store_changes(store))
 
         elif edit_line == "3":
-            new_value = input("Ange ny postkod: ")
-            store.zip_code = new_value
-            cs.store_changes(store)
+            store.zip_code = input("Ange ny postkod: ")
+            print(cs.store_changes(store))
 
         elif edit_line == "4":
-            new_value = input("Ange ny stad: ")
-            store.city = new_value
-            cs.store_changes(store)
+            store.city = input("Ange ny stad: ")
+            print(cs.store_changes(store))
 
         elif edit_line == "5":
-            new_value = input("Ange nytt telefonnummer: ")
-            store.phone = new_value
-            cs.store_changes(store)
+            store.phone = input("Ange nytt telefonnummer: ")
+            print(cs.store_changes(store))
 
         elif edit_line == "6":
-            new_value = input("Ange ny email: ")
-            store.email = new_value
-            cs.store_changes(store)
+            store.email = input("Ange ny email: ")
+            print(cs.store_changes(store))
+
+        elif edit_line == "7":
+            break
 
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
@@ -124,7 +122,7 @@ def remove_store(store):
 
         if action.lower() == "j":
             if not store.employees:
-                cs.remove_store(store)
+                print(cs.remove_store(store))
             else:
                 print(f"Du får inte ta bort butiken {store} eftersom det finns tillhörande anställda. "
                       f"Ta bort eller flytta dessa innan du försöker igen.")
@@ -149,11 +147,11 @@ def add_store():
     email = input("Emailadress: ")
 
     store_data = (name, street_address, zip_code, city, phone, email)
-    cs.add_store(store_data)
+    print(cs.add_store(store_data))
 
 
 def main():
-    store_menu()
+    pass
 
 
 if __name__ == "__main__":
