@@ -12,7 +12,7 @@ class Order(Base):
     employee_id = Column(Integer, ForeignKey('employees.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Employees
     store_id = Column(Integer, ForeignKey('stores.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Stores
 
-    date_created = Column(TIMESTAMP, nullable=False, default=functions.current_timestamp)
+    date_created = Column(TIMESTAMP, nullable=False)
     status = Column(String(45), nullable=False)  # TODO: Use enum and default?
     comment = Column(String(150), default='')  # TODO: Use text?
 
