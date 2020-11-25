@@ -12,7 +12,6 @@ def add_employee(e):
     new_employee = Employee(store_id=store_id, name=name, phone=phone, email=email, job_title=job_title)
     session.add(new_employee)
     session.commit()
-    print("Ny anställd tillagd")
 
 
 def remove_employee(chosen_employee):
@@ -20,17 +19,7 @@ def remove_employee(chosen_employee):
     session.commit()
 
 
-def change_value(chosen_employee, value, new_value):
-    if value == chosen_employee.name:
-        chosen_employee.name = new_value
-    elif value == chosen_employee.email:
-        chosen_employee.email = new_value
-    elif value == chosen_employee.phone:
-        chosen_employee.phone = new_value
-    elif value == chosen_employee.job_title:
-        chosen_employee.job_title = new_value
-    elif value == chosen_employee.store:
-        pass
+def save_changes(_):
     session.commit()
 
 

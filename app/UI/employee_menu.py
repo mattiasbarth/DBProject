@@ -2,10 +2,6 @@ import Controllers.employee_controller as ec
 from UI.tools import int_input
 
 
-def change_value(chosen_employee, value, new_value):
-    ec.change_value(chosen_employee, value, new_value)
-
-
 def edit_employee(chosen_employee):
     while True:
         print("------------------")
@@ -20,34 +16,32 @@ def edit_employee(chosen_employee):
         selected = input("> ")
 
         if selected == "1":
-            value = chosen_employee.name
-            new_value = input("Ange nytt namn: ")
-            change_value(chosen_employee, value, new_value)
+            chosen_employee.name = input("Ange nytt namn: ")
+            ec.save_changes(chosen_employee)
 
         elif selected == "2":
-            value = chosen_employee.store
-            new_value = input("Ange ny butik: ")
-            change_value(chosen_employee, value, new_value)
+            chosen_employee.name = input("Ange ny butik (Ange butikens id): ")
+            ec.save_changes(chosen_employee)
 
         elif selected == "3":
-            value = chosen_employee.phone
-            new_value = input("Ange nytt telefonnummer: ")
-            change_value(chosen_employee, value, new_value)
+            chosen_employee.name = input("Ange nytt telefonnummer: ")
+            ec.save_changes(chosen_employee)
 
         elif selected == "4":
-            value = chosen_employee.email
-            new_value = input("Ange ny mail: ")
-            change_value(chosen_employee, value, new_value)
+            chosen_employee.name = input("Ange ny mail: ")
+            ec.save_changes(chosen_employee)
 
         elif selected == "5":
-            value = chosen_employee.job_title
-            new_value = input("Ange ny jobtitel: ")
-            change_value(chosen_employee, value, new_value)
+            chosen_employee.name = input("Ange ny jobtitel: ")
+            ec.save_changes(chosen_employee)
 
         elif selected == "6":
             break
         else:
             print("Felaktig inmatning")
+
+        changed_string = ec.save_changes(chosen_employee)
+        print(changed_string)
 
 
 def remove_employee(chosen_employee):
@@ -152,6 +146,3 @@ def employees_menu():
             break
         else:
             print("Felaktig inmatning")
-
-
-employees_menu()

@@ -7,16 +7,16 @@ def find_employees(search):
 
 def add_employee(e):
     er.add_employee(e)
+    return f"{e.name} tillagd"
 
 
 def remove_employee(chosen_employee):
     er.remove_employee(chosen_employee)
-    print(f"{chosen_employee} är nu borttagen")
+    return f"{chosen_employee} är nu borttagen"
 
-
-def change_value(chosen_employee, value, new_value):
-    er.change_value(chosen_employee, value, new_value)
-    print(f"Uppdaterad!")
+def save_changes(chosen_employee):
+    er.save_changes(chosen_employee)
+    return "Uppdaterad!"
 
 def existing_store(store_id):
     return er.existing_store(store_id)
