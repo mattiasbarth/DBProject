@@ -1,3 +1,5 @@
+import os
+
 def int_input(user_input):
     while True:
         data = input(user_input)

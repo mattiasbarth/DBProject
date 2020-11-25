@@ -18,10 +18,3 @@ def add_store(store):
     session.add(store)
     session.commit()
 
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()

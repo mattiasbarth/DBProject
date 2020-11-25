@@ -14,6 +14,7 @@ def products_menu():
             find_product(search)
         elif selected == "2":
             print("Produkt information: ")
+
             p_name = input("Namn: ")
             p_description = input("Beskrivning: ")
             p_inventory_id = input("Lagerplats: ")
