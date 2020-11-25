@@ -13,8 +13,8 @@ class Order(Base):
     store_id = Column(Integer, ForeignKey('stores.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Stores
 
     date_created = Column(TIMESTAMP, nullable=False, default=functions.current_timestamp)
-    status = Column(String(45), nullable=False)
-    comment = Column(String(150))
+    status = Column(String(45), nullable=False)  # TODO: Use enum and default?
+    comment = Column(String(150), default='')  # TODO: Use text?
 
     store = relationship('Store', back_populates='orders')
     employee = relationship('Employee')
