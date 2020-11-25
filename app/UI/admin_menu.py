@@ -12,11 +12,11 @@ def admin_menu():
 
         selected = input("> ")
         if selected == "1":
-            pass
+            store_menu()
         elif selected == "2":
             employees_menu()
         elif selected == "3":
-            pass
+            order_menu()
         elif selected == "10":
             break
         else:

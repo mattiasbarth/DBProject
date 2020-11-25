@@ -3,6 +3,7 @@ from ..db import Base
 from sqlalchemy import Column, Integer, String
 import app.Data.models
 
+
 class Store(Base):
     __tablename__ = "stores"
 
