@@ -140,7 +140,7 @@ def employees_menu():
         print("-----------------")
         print("1. Redigera/ta bort")
         print("2. Lägg till")
-        print("3. Adminmeny")
+        print("3. Gå tillbaka till adminmeny")
 
         selected = input("> ")
         if selected == "1":
