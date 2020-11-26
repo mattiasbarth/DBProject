@@ -2,6 +2,10 @@ from Data.db import session
 from Data.models.customers import Customer
 
 
+def save_changes(_):
+    session.commit()
+    
+    
 def find_customer_by_name(keyword):
     return session.query(Customer).filter(Customer.name.like(f'%{keyword}%')).all()
 
