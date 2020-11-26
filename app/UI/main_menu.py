@@ -1,10 +1,10 @@
-from UI.admin_menu import admin_menu
-from UI.customer_management_menu import customer_management_menu
+from UI.Admin.menu import admin_menu
+from UI.Customer_management.menu import customer_management_menu
 
 
 def main_menu():
     while True:
-        print("HUVUDMENY".rjust(16))
+        print("      HUVUDMENY       ")
         print("----------------------")
         print("1. Admin")
         print("2. Kundhantering")
