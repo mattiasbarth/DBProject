@@ -9,7 +9,7 @@ def find_customer():
     pass
 
 
-def show_customer():
+def show_customer(customer):
     find_customer()
     # Kontaktuppgifter
     # Ordrar
@@ -19,7 +19,8 @@ def show_customer():
 
 def show_customer_menu():
     while True:
-
+        find_customer()
+        add_new_customer()
     pass
 
 
