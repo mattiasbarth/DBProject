@@ -51,7 +51,6 @@ def edit_employee(chosen_employee):
             print("Felaktig inmatning")
 
 
-
 def remove_employee(chosen_employee):
     while True:
         print("----------------")
@@ -154,5 +153,3 @@ def employees_menu():
             break
         else:
             print("Felaktig inmatning")
-
-employees_menu()

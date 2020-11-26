@@ -4,7 +4,7 @@ from UI.tools import int_input
 
 def store_menu():
     while True:
-        print("BUTIKER")
+        print("        BUTIKER       ")
         print("----------------------")
         print("1. Redigera/ta bort")
         print("2. Lägg till")
