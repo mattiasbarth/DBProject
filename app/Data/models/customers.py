@@ -29,4 +29,4 @@ class Customer(Base):
     customer_type = relationship('CustomerType', back_populates='customers')
 
     def __repr__(self):
-        pass
+        return f"{self.name}"

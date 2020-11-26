@@ -1,4 +1,4 @@
-from UI.Customer_management.customer_management import find_customer, add_new_customer
+from UI.Customer_management.customer_management import find_customer_menu, add_new_customer
 
 
 def customer_management_menu():
@@ -11,7 +11,7 @@ def customer_management_menu():
 
         selected = input("> ")
         if selected == "1":
-            find_customer()
+            find_customer_menu()
         elif selected == "2":
             add_new_customer()
         elif selected == "3":
