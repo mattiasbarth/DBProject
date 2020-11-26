@@ -21,4 +21,4 @@ class Order(Base):
     products = relationship('Product', secondary='ordered_products')
 
     def __repr__(self):
-        pass
+        return f"{self.id}"

@@ -2,7 +2,6 @@ import Controllers.customer_controller as cc
 from UI.tools import int_input
 
 
-
 def add_new_customer():
     pass
 
@@ -10,14 +9,16 @@ def add_new_customer():
 def show_customer(chosen_customer):
     print("     KUNDBILD     ")
     print("------------------")
-    print(f"Namn: {chosen_customer.name} ({chosen_customer.customer_type})")
+    print(f"Namn: {chosen_customer.name}")
+    #print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type)})")
     if chosen_customer.contact_person:
-        print(f"Kontaktperson{chosen_customer.contact_person}")
-    print(f"Address: {chosen_customer.street_addres}")
+        print(f"Kontaktperson: {chosen_customer.contact_person}")
+    print(f"Address: {chosen_customer.street_address}")
     print(f"Postkod: {chosen_customer.zip_code}")
     print(f"Email: {chosen_customer.email}")
     print(f"Telefonnummer: {chosen_customer.phone}")
-    print(f"Ordrar: {chosen_customer.orders}")
+    if chosen_customer.orders:
+        print(f"Ordrar: {chosen_customer.orders}")
     print(f"Bilar: {chosen_customer.customer_cars}")
     show_customer_menu(chosen_customer)
 
@@ -86,7 +87,6 @@ def choose_customer(customers):
         print("Det finns ingen kund som uppfyller sökkraven.")
 
 
-
 def show_customer_menu(chosen_customer):
     while True:
         print("------------------")
@@ -94,9 +94,9 @@ def show_customer_menu(chosen_customer):
         print("1. Redigera kunden")
         print("2. Lägg till bil")
         print("3. Ta bort bil")
-        print("3. Lägg till order")
-        print("4. Ta bort kunden")
-        print("5. Avbryt")
+        print("4. Lägg till order")
+        print("5. Ta bort kunden")
+        print("6. Avbryt")
         selected = input("> ")
         if selected == "1":
             edit_customer(chosen_customer)
@@ -124,13 +124,15 @@ def edit_customer(chosen_customer):
         print("--------------")
         print(f"REDIGERA KUND")
         print(f"1. Namn: {chosen_customer.name}")
-        print(f"2. Address: {chosen_customer.store}")
-        print(f"3. Postkod: {chosen_customer.phone}")
+        print(f"2. Address: {chosen_customer.street_address}")
+        print(f"3. Postkod: {chosen_customer.zip_code}")
         print(f"4. Email: {chosen_customer.email}")
-        print(f"5. Telefonnummer: {chosen_customer.job_title}")
+        print(f"5. Telefonnummer: {chosen_customer.phone}")
         if chosen_customer.contact_person:
-            print(f"6. {chosen_customer.contact_person}")
-        print(f"7. Avbryt")
+            print(f"6. Konkaktperson: {chosen_customer.contact_person}")
+            print(f"7. Avbryt")
+        else:
+            print(f"6. Avbryt")
         print(f"Vilken rad vill du redigera?")
         selected = input("> ")
 
@@ -147,24 +149,24 @@ def edit_customer(chosen_customer):
             print(changed_string)
 
         elif selected == "3":
-            chosen_customer.name = input("Ange ny postkod: ")
+            chosen_customer.zip_code = input("Ange ny postkod: ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == "4":
-            chosen_customer.name = input("Ange ny mail: ")
+            chosen_customer.email = input("Ange ny mail: ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == "5":
-            chosen_customer.name = input("Ange nytt telefonnummer: ")
+            chosen_customer.phone = input("Ange nytt telefonnummer: ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
-        elif selected == "6":
+        elif selected == "6" or selected == "7":
             break
         else:
             print("Felaktig inmatning")
