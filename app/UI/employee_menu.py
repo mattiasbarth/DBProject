@@ -155,4 +155,6 @@ def employees_menu():
         else:
             print("Felaktig inmatning")
 
-employees_menu()
+
+if __name__ == '__main__':
+    employees_menu()
