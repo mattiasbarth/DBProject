@@ -16,4 +16,4 @@ class ContactPerson(Base):
     partners = relationship('Partner', back_populates='contact_person')
 
     def __repr__(self):
-        return f"{self.name} (id = {self.id})"
+        return f"{self.name} ({self.id}) - {self.phone}, {self.email}"

@@ -15,4 +15,4 @@ class CustomerCar(Base):
     car_model = relationship("CarModel", back_populates="cars")
 
     def __repr__(self):
-        return f"{self.car_model} {self.regnr}"
+        return f"{self.color} {self.car_model} {self.regnr}"

@@ -21,4 +21,4 @@ class Order(Base):
     products = relationship('Product', secondary='ordered_products')
 
     def __repr__(self):
-        return f"{self.id}"
+        return f"Ordernummer: {self.id} | Lagd: {self.date_created} "
