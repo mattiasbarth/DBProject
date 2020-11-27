@@ -1,10 +1,37 @@
 import Controllers.customer_controller as cc
+import Controllers.contact_person_controller as ccp
 from UI.tools import int_input
 
 
-
 def add_new_customer():
-    pass
+    print("----------------------")
+    print("LÄGG TILL KUND")
+    print("Besvara följande frågor:")
+
+    name = input("Kundens namn: ")
+    street_address = input("Gatuadress: ")
+    zip_code = input("Postkod: ")
+    city = input("Stad: ")
+    phone = input("Telefonnummer: ")
+    email = input("Email: ")
+    customer_type = int_input("Kundtyp: ange 1 för privatkund och 2 för företagskund: ")
+    if customer_type == 2:
+        while True:
+            contact_id = int_input("Kontaktpersonens id: ")
+            if not ccp.find_contact_person:
+                print(f"Hittade ingen kontaktperson med id {contact_id}")
+            else:
+                break
+
+        customer_data = (name, street_address, zip_code, city, phone, email, customer_type, contact_id)
+        customer, info_string = cc.add_business(customer_data)
+
+    else:
+        customer_data = (name, street_address, zip_code, city, phone, email, customer_type)
+        customer, info_string = cc.add_private(customer_data)
+
+    print(info_string)
+    show_customer(customer)
 
 
 def show_customer(chosen_customer):
@@ -12,8 +39,8 @@ def show_customer(chosen_customer):
     print("------------------")
     print(f"Namn: {chosen_customer.name} ({chosen_customer.customer_type})")
     if chosen_customer.contact_person:
-        print(f"Kontaktperson{chosen_customer.contact_person}")
-    print(f"Address: {chosen_customer.street_addres}")
+        print(f"Kontaktperson {chosen_customer.contact_person}")
+    print(f"Address: {chosen_customer.street_address}")
     print(f"Postkod: {chosen_customer.zip_code}")
     print(f"Email: {chosen_customer.email}")
     print(f"Telefonnummer: {chosen_customer.phone}")
@@ -76,15 +103,14 @@ def choose_customer(customers):
             while True:
                 customer_choice = int_input("Vilken kund vill du visa?")
                 if 1 <= customer_choice <= len(customers):
-                    customer = customers[customer_choice - 1]
-                    show_customer(customer)
+                    chosen_customer = customers[customer_choice - 1]
+                    show_customer(chosen_customer)
                     break
                 else:
                     print("Du har gjort ett ogiltigt val. Försök igen.")
 
     else:
         print("Det finns ingen kund som uppfyller sökkraven.")
-
 
 
 def show_customer_menu(chosen_customer):

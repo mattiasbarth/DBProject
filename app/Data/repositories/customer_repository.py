@@ -16,3 +16,9 @@ def find_customer_by_id(keyword):
 
 def find_customer_by_phone(keyword):
     return session.query(Customer).filter(Customer.phone.like(f'%{keyword}%')).all()
+
+
+def add_customer(customer):
+    session.add(customer)
+    session.commit()
+
