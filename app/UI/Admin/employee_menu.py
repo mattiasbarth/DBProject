@@ -58,9 +58,11 @@ def remove_employee(chosen_employee):
         print(f"Är du säker på att du vill ta bort {chosen_employee}")
         print("1. Ja")
         print("2. Nej")
-        confirm = input("> ")
+        confirm = int_input("> ")
         if confirm == "1":
             ec.remove_employee(chosen_employee)
+            removed_string = ec.remove_employee(chosen_employee)
+            print(removed_string)
             break
         elif confirm == "2":
             print("Anställd har inte tagits bort")
@@ -69,8 +71,8 @@ def remove_employee(chosen_employee):
             print("Felaktig inmatning")
 
 
-def existing_store(store_id):
-    store = ec.existing_store(store_id)
+def find_store(store_id):
+    store = ec.find_store(store_id)
     if len(store) == 0:
         return False
     else:
@@ -83,7 +85,7 @@ def add_employee():
     print("Ange uppgifter på den anställda du vill lägga till")
     while True:
         e_store = int_input("Butiks id: ")
-        if not existing_store(e_store):
+        if not find_store(e_store):
             print(f"Hittade ingen butik med id {e_store}")
         else:
             break
@@ -112,7 +114,7 @@ def edit_remove_menu(chosen_employee):
             print("Felaktig inmatning")
 
 
-def search_employee():
+def find_employee():
     while True:
         search = input("Sök: ")
         matching_employees = ec.find_employees(search)
@@ -144,7 +146,7 @@ def employees_menu():
 
         selected = input("> ")
         if selected == "1":
-            search_employee()
+            find_employee()
 
         elif selected == "2":
             add_employee()

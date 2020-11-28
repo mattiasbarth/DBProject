@@ -12,7 +12,7 @@ def find_customer_by_name(keyword):
 
 
 def find_customer_by_id(keyword):
-    return session.query(Customer).filter(Customer.id == keyword).first()
+    return session.query(Customer).filter(Customer.id == keyword).all()
 
 
 def find_customer_by_phone(keyword):
@@ -24,6 +24,7 @@ def add_car(c):
     new_car = CustomerCar(customer_id=customer_id, regnr=regnr, car_model_id=car_model_id, color=color)
     session.add(new_car)
     session.commit()
+    return new_car
 
 
 def find_customer_car(regnr):

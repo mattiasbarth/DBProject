@@ -23,5 +23,5 @@ def save_changes(_):
     session.commit()
 
 
-def existing_store(store_id):
+def find_store(store_id):
     return session.query(Store).filter(Store.id.like(f'%{store_id}%')).all()

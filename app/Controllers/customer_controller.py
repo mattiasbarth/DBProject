@@ -19,8 +19,8 @@ def find_customer_by_phone(keyword):
 
 
 def add_car(c):
-    cr.add_car(c)
-    return "Tillagd"
+    added_car = cr.add_car(c)
+    return f"{added_car} - tillagd"
 
 
 def find_customer_car(regnr):
@@ -29,7 +29,9 @@ def find_customer_car(regnr):
 
 def remove_customer_car(car):
     cr.remove_customer_car(car)
+    return f"{car} - borttagen"
 
 
 def remove_customer(chosen_customer):
     cr.remove_customer(chosen_customer)
+    return f"{chosen_customer} - borttagen"

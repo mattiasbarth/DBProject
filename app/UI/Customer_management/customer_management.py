@@ -8,24 +8,32 @@ def show_customer(chosen_customer):
     print("     KUNDBILD     ")
     print("------------------")
     print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type)})")
+
     if chosen_customer.contact_person:
         print(f"Kontaktperson: {chosen_customer.contact_person}")
+
     print(f"Address: {chosen_customer.street_address}")
     print(f"Postkod: {chosen_customer.zip_code}")
     print(f"Email: {chosen_customer.email}")
     print(f"Telefonnummer: {chosen_customer.phone}")
-    print("------------------")
+
     if chosen_customer.orders:
+        print("------------------")
         print("Ordrar:")
         for order in chosen_customer.orders:
             print(order)
-    print("------------------")
-    print("Bilar:")
-    for car in chosen_customer.customer_cars:
-        print(car)
+        print("------------------")
+
+    if chosen_customer.customer_cars:
+        print("------------------")
+        print("Bilar:")
+        for car in chosen_customer.customer_cars:
+            print(car)
+        print("------------------")
+
     show_customer_menu(chosen_customer)
 
-    
+
 def find_customer_menu():
     while True:
         print("----------------------")
@@ -40,55 +48,57 @@ def find_customer_menu():
         if choice == "1":
             keyword = input("Ange namn: ")
             customers = cc.find_customer_by_name(keyword)
-            choose_customer(customers)
-            break
+            if customers:
+                choose_customer(customers)
+                break
+            else:
+                print("Det finns ingen kund som uppfyller sökkraven")
 
         elif choice == "2":
             keyword = int_input("Ange id: ")
-            customer = cc.find_customer_by_id(keyword)
-            if customer:
-                print(customer)
-                show_customer(customer)
+            customers = cc.find_customer_by_id(keyword)
+            if customers:
+                choose_customer(customers)
+                break
             else:
                 print("Det finns ingen kund som uppfyller sökkraven.")
-            break
 
         elif choice == "3":
             keyword = input("Ange telefonnumer: ")
             customers = cc.find_customer_by_phone(keyword)
-            choose_customer(customers)
-            break
+            if customers:
+                choose_customer(customers)
+                break
+            else:
+                print("Det finns ingen kund som uppfyller sökkraven.")
 
         elif choice == "4":
             break
 
         else:
-            print("Du har gjort ett ogiltigt val. Försök igen.")
+            print("Felaktig inmatning.")
 
 
 def choose_customer(customers):
-    if customers:
-        if len(customers) == 1:
-            print(customers[0])
-            show_customer(customers[0])
-
-        else:
-            print("Matchande sökningar:")
-            for i, customer in enumerate(customers):
-                print(f"{i + 1}. {customer}")
-
-            while True:
-                print("Vilken kund vill du visa?")
-                customer_choice = int_input("> ")
-                if 1 <= customer_choice <= len(customers):
-                    customer = customers[customer_choice - 1]
-                    show_customer(customer)
-                    break
-                else:
-                    print("Du har gjort ett ogiltigt val. Försök igen.")
+    if len(customers) == 1:
+        customer = customers[0]
+        print(customer)
+        show_customer(customer)
 
     else:
-        print("Det finns ingen kund som uppfyller sökkraven.")
+        print("Matchande sökningar:")
+        for i, customer in enumerate(customers):
+            print(f"{i + 1}. {customer}")
+
+        while True:
+            print("Vilken kund vill du visa?")
+            customer_choice = int_input("> ")
+            if 1 <= customer_choice <= len(customers):
+                customer = customers[customer_choice - 1]
+                show_customer(customer)
+                break
+            else:
+                print("Felaktig inmatning.")
 
 
 def show_customer_menu(chosen_customer):
@@ -101,21 +111,29 @@ def show_customer_menu(chosen_customer):
         print("4. Lägg till order")
         print("5. Ta bort kunden")
         print("6. Avbryt")
+
         selected = input("> ")
+
         if selected == "1":
             edit_customer(chosen_customer)
+
         elif selected == "2":
             add_car(chosen_customer.id)
+
         elif selected == "3":
             remove_car_menu()
             pass
+
         elif selected == "4":
             place_order()
+
         elif selected == "5":
             remove_customer(chosen_customer)
             break
+
         elif selected == "6":
             break
+
         else:
             print("Felaktig inmatning")
 
@@ -124,6 +142,7 @@ def add_car(customer_id):
     print("-------------------")
     print("LÄGGA TILL BIL")
     print("Ange uppgifter på den bil du vill lägga till")
+
     regnr = input("Regnummer: ")
 
     while True:
@@ -135,26 +154,35 @@ def add_car(customer_id):
 
     color = input("Bilfärg: ")
     c = (customer_id, regnr, car_model_id, color)
-    print(cc.add_car(c))
+    added_string = cc.add_car(c)
+    print(added_string)
 
 
 def remove_car_menu():
+
     print("Ange regnummret på den bil du vill ta bort")
+
     while True:
         regnr = input("> ")
         found_car = cc.find_customer_car(regnr)
         print(found_car)
+
         if found_car:
             print(f"Är du säker på att du vill ta bort denna bil?")
             print(f"Modell: {found_car.car_model} | Regnummer: {found_car.regnr} | Ägare: {found_car.customer}")
             print("1. Ja")
             print("2. Nej")
             selected = int_input("> ")
+
             if selected == 1:
                 cc.remove_customer_car(found_car)
+                removed_string = cc.remove_customer_car(found_car)
+                print(removed_string)
                 break
+
             elif selected == 2:
                 break
+
         else:
             print(f"Hittade ingen bil med id {regnr}")
 
@@ -165,16 +193,25 @@ def add_new_customer():
 
 def remove_customer(chosen_customer):
     while True:
+        print("----------------")
+        print("TA BORT KUND")
         print(f"Är du säker på att du vill ta bort denna kunden?")
         print(f"{chosen_customer} ({chosen_customer.id})")
         print("1. Ja")
         print("2. Nej")
+
         selected = int_input("> ")
         if selected == 1:
             cc.remove_customer(chosen_customer)
+            removed_string = cc.remove_customer(chosen_customer)
+            print(removed_string)
             break
+
         elif selected == 2:
             break
+
+        else:
+            print("Felaktig inmatning")
 
 
 def place_order():
@@ -230,11 +267,13 @@ def edit_customer(chosen_customer):
         elif selected == "6":
             while True:
                 cp_id = input("Ange id för den nya kontaktpersonen: ")
+
                 if cpc.find_contact_person(cp_id):
                     chosen_customer.contact_id = cp_id
                     changed_string = cc.save_changes(chosen_customer)
                     print(changed_string)
                     break
+
                 else:
                     print(f"Hittade ingen kontaktperson med id {cp_id}")
 
