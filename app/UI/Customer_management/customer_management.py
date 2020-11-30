@@ -58,15 +58,15 @@ def find_customer_menu():
         print("3. Sök efter telefonnummer")
         print("4. Avbryt")
 
-        choice = input("> ")
+        choice = int_input("> ")
 
-        if choice == "1":
+        if choice == 1:
             keyword = input("Ange namn: ")
             customers = cc.find_customer_by_name(keyword)
             choose_customer(customers)
             break
 
-        elif choice == "2":
+        elif choice == 2:
             keyword = int_input("Ange id: ")
             customer = cc.find_customer_by_id(keyword)
             if customer:
@@ -76,17 +76,17 @@ def find_customer_menu():
                 print("Det finns ingen kund som uppfyller sökkraven.")
             break
 
-        elif choice == "3":
+        elif choice == 3:
             keyword = input("Ange telefonnumer: ")
             customers = cc.find_customer_by_phone(keyword)
             choose_customer(customers)
             break
 
-        elif choice == "4":
+        elif choice == 4:
             break
 
         else:
-            print("Du har gjort ett ogiltigt val. Försök igen.")
+            print("Felaktig inmatning.")
 
 
 def choose_customer(customers):
@@ -107,7 +107,7 @@ def choose_customer(customers):
                     show_customer(chosen_customer)
                     break
                 else:
-                    print("Du har gjort ett ogiltigt val. Försök igen.")
+                    print("Felaktig inmatning.")
 
     else:
         print("Det finns ingen kund som uppfyller sökkraven.")
