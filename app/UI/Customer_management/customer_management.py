@@ -1,8 +1,38 @@
-import Controllers.customer_controller as cc
 import Controllers.car_model_controller as cmc
 import Controllers.contact_person_controller as cpc
 import Controllers.customer_car_controller as ccc
 from UI.tools import int_input
+
+
+def add_new_customer():
+    print("----------------------")
+    print("LÄGG TILL KUND")
+    print("Besvara följande frågor:")
+
+    name = input("Kundens namn: ")
+    street_address = input("Gatuadress: ")
+    zip_code = input("Postkod: ")
+    city = input("Stad: ")
+    phone = input("Telefonnummer: ")
+    email = input("Email: ")
+    customer_type = int_input("Kundtyp: ange 1 för privatkund och 2 för företagskund: ")
+    if customer_type == 2:
+        while True:
+            contact_id = int_input("Kontaktpersonens id: ")
+            if not ccp.find_contact_person:
+                print(f"Hittade ingen kontaktperson med id {contact_id}")
+            else:
+                break
+
+        customer_data = (name, street_address, zip_code, city, phone, email, customer_type, contact_id)
+        customer, info_string = cc.add_business(customer_data)
+
+    else:
+        customer_data = (name, street_address, zip_code, city, phone, email, customer_type)
+        customer, info_string = cc.add_private(customer_data)
+
+    print(info_string)
+    show_customer(customer)
 
 
 def show_customer(chosen_customer):
@@ -11,8 +41,8 @@ def show_customer(chosen_customer):
     print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type)})")
 
     if chosen_customer.contact_person:
-        print(f"Kontaktperson: {chosen_customer.contact_person}")
-
+        print(f"Kontaktperson {chosen_customer.contact_person}")
+        
     print(f"Address: {chosen_customer.street_address}")
     print(f"Postkod: {chosen_customer.zip_code}")
     print(f"Email: {chosen_customer.email}")
@@ -81,26 +111,27 @@ def find_customer_menu():
 
 
 def choose_customer(customers):
-    if len(customers) == 1:
-        customer = customers[0]
-        print(customer)
-        show_customer(customer)
+    if customers:
+        if len(customers) == 1:
+            print(customers[0])
+            show_customer(customers[0])
 
+        else:
+            print("Matchande sökningar:")
+            for i, customer in enumerate(customers):
+                print(f"{i + 1}. {customer}")
+
+            while True:
+                customer_choice = int_input("Vilken kund vill du visa?")
+                if 1 <= customer_choice <= len(customers):
+                    chosen_customer = customers[customer_choice - 1]
+                    show_customer(chosen_customer)
+                    break
+                else:
+                    print("Felaktig inmatning.")
     else:
-        print("Matchande sökningar:")
-        for i, customer in enumerate(customers):
-            print(f"{i + 1}. {customer}")
-
-        while True:
-            print("Vilken kund vill du visa?")
-            customer_choice = int_input("> ")
-            if 1 <= customer_choice <= len(customers):
-                customer = customers[customer_choice - 1]
-                show_customer(customer)
-                break
-            else:
-                print("Felaktig inmatning.")
-
+      print("Det finns ingen kund som uppfyller sökkraven")
+                    
 
 def show_customer_menu(chosen_customer):
     while True:
@@ -185,11 +216,7 @@ def remove_car_menu():
 
         else:
             print(f"Hittade ingen bil med id {regnr}")
-
-
-def add_new_customer():
-    pass
-
+            
 
 def remove_customer(chosen_customer):
     while True:

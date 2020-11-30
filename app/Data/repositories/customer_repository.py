@@ -18,6 +18,13 @@ def find_customer_by_phone(keyword):
     return session.query(Customer).filter(Customer.phone.like(f'%{keyword}%')).all()
 
 
+
+def add_customer(customer):
+    session.add(customer)
+    session.commit()
+
+
 def remove_customer(chosen_customer):
     session.delete(chosen_customer)
     session.commit()
+
