@@ -1,7 +1,8 @@
 from sqlalchemy.sql import functions
 from sqlalchemy.orm import relationship
+
 from ..db import Base
-from sqlalchemy import Column, Integer, String, TIMESTAMP, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 
 
 class Order(Base):
@@ -12,7 +13,7 @@ class Order(Base):
     employee_id = Column(Integer, ForeignKey('employees.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Employees
     store_id = Column(Integer, ForeignKey('stores.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Stores
 
-    date_created = Column(TIMESTAMP, nullable=False)
+    date_created = Column(DateTime(timezone=True), nullable=False, default=functions.now)
     status = Column(String(45), nullable=False)  # TODO: Use enum and default?
     comment = Column(String(150), default='')  # TODO: Use text?
 
