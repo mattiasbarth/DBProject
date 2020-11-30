@@ -1,5 +1,4 @@
 from Data.models.employees import Employee
-from Data.models.stores import Store
 from Data.db import session
 
 
@@ -21,7 +20,3 @@ def remove_employee(chosen_employee):
 
 def save_changes(_):
     session.commit()
-
-
-def existing_store(store_id):
-    return session.query(Store).filter(Store.id.like(f'%{store_id}%')).all()
