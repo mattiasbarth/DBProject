@@ -1,4 +1,5 @@
 from UI.Customer_management.customer_management import find_customer_menu, add_new_customer
+from UI.tools import int_input
 
 
 def customer_management_menu():
@@ -9,12 +10,12 @@ def customer_management_menu():
         print("2. Lägg till ny kund")
         print("3. Huvudmeny")
 
-        selected = input("> ")
-        if selected == "1":
+        selected = int_input("> ")
+        if selected == 1:
             find_customer_menu()
-        elif selected == "2":
+        elif selected == 2:
             add_new_customer()
-        elif selected == "3":
+        elif selected == 3:
             break
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
