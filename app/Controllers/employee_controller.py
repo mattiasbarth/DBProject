@@ -18,7 +18,3 @@ def remove_employee(chosen_employee):
 def save_changes(chosen_employee):
     er.save_changes(chosen_employee)
     return "Uppdaterad"
-
-
-def find_store(store_id):
-    return er.find_store(store_id)

@@ -1,6 +1,7 @@
 import Controllers.customer_controller as cc
 import Controllers.car_model_controller as cmc
 import Controllers.contact_person_controller as cpc
+import Controllers.customer_car_controller as ccc
 from UI.tools import int_input
 
 
@@ -43,9 +44,9 @@ def find_customer_menu():
         print("3. Sök efter telefonnummer")
         print("4. Avbryt")
 
-        choice = input("> ")
+        choice = int_input("> ")
 
-        if choice == "1":
+        if choice == 1:
             keyword = input("Ange namn: ")
             customers = cc.find_customer_by_name(keyword)
             if customers:
@@ -54,7 +55,7 @@ def find_customer_menu():
             else:
                 print("Det finns ingen kund som uppfyller sökkraven")
 
-        elif choice == "2":
+        elif choice == 2:
             keyword = int_input("Ange id: ")
             customers = cc.find_customer_by_id(keyword)
             if customers:
@@ -63,7 +64,7 @@ def find_customer_menu():
             else:
                 print("Det finns ingen kund som uppfyller sökkraven.")
 
-        elif choice == "3":
+        elif choice == 3:
             keyword = input("Ange telefonnumer: ")
             customers = cc.find_customer_by_phone(keyword)
             if customers:
@@ -72,7 +73,7 @@ def find_customer_menu():
             else:
                 print("Det finns ingen kund som uppfyller sökkraven.")
 
-        elif choice == "4":
+        elif choice == 4:
             break
 
         else:
@@ -112,33 +113,33 @@ def show_customer_menu(chosen_customer):
         print("5. Ta bort kunden")
         print("6. Avbryt")
 
-        selected = input("> ")
+        selected = int_input("> ")
 
-        if selected == "1":
+        if selected == 1:
             edit_customer(chosen_customer)
 
-        elif selected == "2":
-            add_car(chosen_customer.id)
+        elif selected == 2:
+            add_customer_car(chosen_customer.id)
 
-        elif selected == "3":
+        elif selected == 3:
             remove_car_menu()
             pass
 
-        elif selected == "4":
+        elif selected == 4:
             place_order()
 
-        elif selected == "5":
+        elif selected == 5:
             remove_customer(chosen_customer)
             break
 
-        elif selected == "6":
+        elif selected == 6:
             break
 
         else:
             print("Felaktig inmatning")
 
 
-def add_car(customer_id):
+def add_customer_car(customer_id):
     print("-------------------")
     print("LÄGGA TILL BIL")
     print("Ange uppgifter på den bil du vill lägga till")
@@ -154,7 +155,7 @@ def add_car(customer_id):
 
     color = input("Bilfärg: ")
     c = (customer_id, regnr, car_model_id, color)
-    added_string = cc.add_car(c)
+    added_string = ccc.add_customer_car(c)
     print(added_string)
 
 
@@ -164,8 +165,7 @@ def remove_car_menu():
 
     while True:
         regnr = input("> ")
-        found_car = cc.find_customer_car(regnr)
-        print(found_car)
+        found_car = ccc.find_customer_car(regnr)
 
         if found_car:
             print(f"Är du säker på att du vill ta bort denna bil?")
@@ -175,8 +175,8 @@ def remove_car_menu():
             selected = int_input("> ")
 
             if selected == 1:
-                cc.remove_customer_car(found_car)
-                removed_string = cc.remove_customer_car(found_car)
+                ccc.remove_customer_car(found_car)
+                removed_string = ccc.remove_customer_car(found_car)
                 print(removed_string)
                 break
 
@@ -201,7 +201,9 @@ def remove_customer(chosen_customer):
         print("2. Nej")
 
         selected = int_input("> ")
+
         if selected == 1:
+            ccc.remove_all_customer_cars(chosen_customer)
             cc.remove_customer(chosen_customer)
             removed_string = cc.remove_customer(chosen_customer)
             print(removed_string)
@@ -232,41 +234,41 @@ def edit_customer(chosen_customer):
             print(f"6. Konkaktperson: {chosen_customer.contact_person}")
         print(f"7. Avbryt")
         print(f"Vilken rad vill du redigera?")
-        selected = input("> ")
+        selected = int_input("> ")
 
-        if selected == "1":
+        if selected == 1:
             chosen_customer.name = input("Ange nytt namn: ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
-        elif selected == "2":
+        elif selected == 2:
             chosen_customer.name = input("Ange ny address): ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
-        elif selected == "3":
+        elif selected == 3:
             chosen_customer.zip_code = input("Ange ny postkod: ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
-        elif selected == "4":
+        elif selected == 4:
             chosen_customer.email = input("Ange ny mail: ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
-        elif selected == "5":
+        elif selected == 5:
             chosen_customer.phone = input("Ange nytt telefonnummer: ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
-        elif selected == "6":
+        elif selected == 6:
             while True:
-                cp_id = input("Ange id för den nya kontaktpersonen: ")
+                cp_id = int_input("Ange id för den nya kontaktpersonen: ")
 
                 if cpc.find_contact_person(cp_id):
                     chosen_customer.contact_id = cp_id
@@ -277,7 +279,7 @@ def edit_customer(chosen_customer):
                 else:
                     print(f"Hittade ingen kontaktperson med id {cp_id}")
 
-        elif selected == "7":
+        elif selected == 7:
             break
         else:
             print("Felaktig inmatning")

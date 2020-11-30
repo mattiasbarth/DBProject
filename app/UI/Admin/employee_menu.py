@@ -1,4 +1,5 @@
 import Controllers.employee_controller as ec
+import Controllers.store_controller as sc
 from UI.tools import int_input
 
 
@@ -13,39 +14,39 @@ def edit_employee(chosen_employee):
         print(f"5. Jobtitel: {chosen_employee.job_title}")
         print(f"6. Avbryt")
         print(f"Vilken rad vill du redigera?")
-        selected = input("> ")
+        selected = int_input("> ")
 
-        if selected == "1":
+        if selected == 1:
             chosen_employee.name = input("Ange nytt namn: ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
-        elif selected == "2":
+        elif selected == 2:
             chosen_employee.name = input("Ange ny butik (Ange butikens id): ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
-        elif selected == "3":
+        elif selected == 3:
             chosen_employee.name = input("Ange nytt telefonnummer: ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
-        elif selected == "4":
+        elif selected == 4:
             chosen_employee.name = input("Ange ny mail: ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
-        elif selected == "5":
+        elif selected == 5:
             chosen_employee.name = input("Ange ny jobtitel: ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
-        elif selected == "6":
+        elif selected == 6:
             break
         else:
             print("Felaktig inmatning")
@@ -59,12 +60,12 @@ def remove_employee(chosen_employee):
         print("1. Ja")
         print("2. Nej")
         confirm = int_input("> ")
-        if confirm == "1":
+        if confirm == 1:
             ec.remove_employee(chosen_employee)
             removed_string = ec.remove_employee(chosen_employee)
             print(removed_string)
             break
-        elif confirm == "2":
+        elif confirm == 2:
             print("Anställd har inte tagits bort")
             break
         else:
@@ -72,7 +73,7 @@ def remove_employee(chosen_employee):
 
 
 def find_store(store_id):
-    store = ec.find_store(store_id)
+    store = sc.find_store(store_id)
     if len(store) == 0:
         return False
     else:
@@ -103,12 +104,12 @@ def edit_remove_menu(chosen_employee):
         print("1. Redigera")
         print("2. Ta bort")
         print("3. Avbryt")
-        selected = input("> ")
-        if selected == "1":
+        selected = int_input("> ")
+        if selected == 1:
             edit_employee(chosen_employee)
-        elif selected == "2":
+        elif selected == 2:
             remove_employee(chosen_employee)
-        elif selected == "3":
+        elif selected == 3:
             break
         else:
             print("Felaktig inmatning")
@@ -144,14 +145,14 @@ def employees_menu():
         print("2. Lägg till")
         print("3. Gå tillbaka till adminmeny")
 
-        selected = input("> ")
-        if selected == "1":
+        selected = int_input("> ")
+        if selected == 1:
             find_employee()
 
-        elif selected == "2":
+        elif selected == 2:
             add_employee()
 
-        elif selected == "3":
+        elif selected == 3:
             break
         else:
             print("Felaktig inmatning")

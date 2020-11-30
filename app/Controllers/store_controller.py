@@ -1,4 +1,3 @@
-import sqlalchemy
 import Data.repositories.store_repository as sr
 from Data.models.stores import Store
 
