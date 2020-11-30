@@ -6,16 +6,19 @@ def order_menu():
     while True:
         print("Ordrar")
         print("-" * 12)
-        print("1. Lägg till ny order")
-        print("2. Redigera/ta bort order")
-        print("3. Adminmeny")
+        print("1. Lägg till")
+        print("2. Sök")
+        print("3. Redigera/ta bort")
+        print("4. Adminmeny")
 
         selected = input("> ")
         if selected == "1":
             create_order()
         elif selected == "2":
-            edit_order()
+            find_order()
         elif selected == "3":
+            edit_order()
+        elif selected == "4":
             break
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
@@ -56,3 +59,18 @@ def create_order():
 
 def edit_order():
     pass
+
+
+def find_order():
+    while True:
+        order_id = int(input('\nAnge ordernummer: '))
+        order = order_controller.find(order_id)
+        if order:
+            print(order)
+        else:
+            print(f'Kunde inte hitta order med ordernummer {order_id}')
+        if input('\nSök igen? j/n ').lower() != 'j':
+            break
+    print('')
+
+

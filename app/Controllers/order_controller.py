@@ -29,8 +29,8 @@ def delete():
     pass
 
 
-def search():
-    pass
+def find(order_id: int):
+    return order_repository.find(order_id)
 
 
 def add_products(order, *products):

@@ -1,4 +1,5 @@
 import datetime as dt
+from typing import Optional
 
 from Data.models.ordered_products import OrderedProduct
 from Data.models.orders import Order
@@ -22,8 +23,8 @@ def delete():
     pass
 
 
-def search():
-    pass
+def find(order_id: int) -> Optional[Order]:
+    return session.query(Order).filter_by(id=order_id).one_or_none()
 
 
 def add_products(*products, order: Order):
