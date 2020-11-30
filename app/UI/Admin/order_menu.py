@@ -74,3 +74,20 @@ def find_order():
     print('')
 
 
+def remove_order():
+    while True:
+        order_id = int(input('\nAnge ordernummer: '))
+        order = order_controller.find(order_id)
+        print(order, end='\n\n')
+        if input(f'Bekräfta borttagning av order? j/n ').lower() == 'j':
+            is_removed = order_controller.remove(order_id)
+            if is_removed:
+                print(f'Order med ordernummer {order_id} har tagits bort.')
+            else:
+                print(f'Kunde inte hitta order med ordernummer {order_id}')
+        else:
+            print('Åtgärden avbruten.')
+        if input('\nTa bort annan order? j/n ').lower() != 'j':
+            break
+    print('')
+    return order_controller.remove(order_id)
