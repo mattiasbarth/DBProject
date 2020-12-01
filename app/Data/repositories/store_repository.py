@@ -15,9 +15,15 @@ def remove_store(store):
     session.commit()
 
 
-def add_store(store):
+def add_store(store_data):
     name, street_address, zip_code, city, phone, email = store_data
-    store = Store(name=name, street_address=street_address, zip_code=zip_code, city=city, phone=phone, email=email)
-    session.add(store)
+    store_data = Store(
+        name=name,
+        street_address=street_address,
+        zip_code=zip_code,
+        city=city,
+        phone=phone,
+        email=email,
+    )
+    session.add(store_data)
     session.commit()
-
