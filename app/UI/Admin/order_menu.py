@@ -58,7 +58,8 @@ def create_order():
 
 
 def edit_order():
-    pass
+    while True:
+        pass
 
 
 def find_order():

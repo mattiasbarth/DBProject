@@ -21,12 +21,8 @@ def create(
         return None
 
 
-def update():
-    pass
-
-
-def delete():
-    pass
+def edit(order):
+    return order_repository.edit(order)
 
 
 def find(order_id: int):
@@ -44,7 +40,6 @@ def add_products(order, *products):
         except Exception:
             raise ValueError(
                 f'Kunde inte lägga till {product[1]} av produkt {product[0]}')
-            continue
         added_products.append(added_product)
     return added_products
 
@@ -55,3 +50,12 @@ def add_product(order, product):
     except Exception as e:
         raise ValueError(
             f'Kunde inte lägga till {product[1]} av produkt {product[0]}')
+
+
+def remove(order) -> bool:
+    try:
+        order_repository.remove(order)
+        return True
+    except Exception as e:
+        print(repr(e), e.__traceback__)
+        return False

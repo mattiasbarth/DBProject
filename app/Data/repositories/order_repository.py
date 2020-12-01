@@ -15,11 +15,7 @@ def create(**kwargs):
     return order
 
 
-def update():
-    pass
-
-
-def delete():
+def edit(order: Order) -> Optional[Order]:
     pass
 
 
@@ -41,3 +37,8 @@ def add_product(product, order: Order) -> OrderedProduct:
     session.add(ordered_product)
     session.commit()
     return ordered_product
+
+
+def remove(order: Order):
+    session.delete(order)
+    session.commit()
