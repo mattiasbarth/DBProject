@@ -1,22 +1,17 @@
-from Data.models.employees import Employee
-from Data.db import session
+from Data.models.models import Employee
 
 
 def find_employees(search):
-    return session.query(Employee).filter(Employee.name.like(f'%{search}%')).all()
+    pass
 
 
 def add_employee(e):
-    store_id, name, phone, email, job_title = e
-    new_employee = Employee(store_id=store_id, name=name, phone=phone, email=email, job_title=job_title)
-    session.add(new_employee)
-    session.commit()
+    pass
 
 
 def remove_employee(chosen_employee):
-    session.delete(chosen_employee)
-    session.commit()
+    pass
 
 
 def save_changes(_):
-    session.commit()
+    pass
