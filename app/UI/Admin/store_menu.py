@@ -121,11 +121,8 @@ def remove_store(store):
         action = input(f"Är du säker på att du vill ta bort {store}? J/N > ")
 
         if action.lower() == "j":
-            if not store.employees:
-                print(cs.remove_store(store))
-            else:
-                print(f"Du får inte ta bort butiken {store} eftersom det finns tillhörande anställda. "
-                      f"Ta bort eller flytta dessa innan du försöker igen.")
+            print(cs.remove_store(store))
+            break
 
         elif action.lower() == "n":
             print("Butiken har inte tagits bort.")
@@ -146,8 +143,8 @@ def add_store():
     phone = input("Telefonnummer: ")
     email = input("Emailadress: ")
 
-    store_data = (name, street_address, zip_code, city, phone, email)
-    print(cs.add_store(store_data))
+    store = (name, street_address, zip_code, city, phone, email)
+    print(cs.add_store(store))
 
 
 def main():

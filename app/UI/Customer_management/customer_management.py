@@ -1,6 +1,7 @@
 import Controllers.car_model_controller as cmc
 import Controllers.contact_person_controller as cpc
 import Controllers.customer_car_controller as ccc
+import Controllers.customer_controller as cc
 from UI.tools import int_input
 
 
@@ -19,7 +20,7 @@ def add_new_customer():
     if customer_type == 2:
         while True:
             contact_id = int_input("Kontaktpersonens id: ")
-            if not ccp.find_contact_person:
+            if not cpc.find_contact_person:
                 print(f"Hittade ingen kontaktperson med id {contact_id}")
             else:
                 break
@@ -36,6 +37,7 @@ def add_new_customer():
 
 
 def show_customer(chosen_customer):
+    '''
     print("     KUNDBILD     ")
     print("------------------")
     print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type)})")
@@ -61,7 +63,7 @@ def show_customer(chosen_customer):
         for car in chosen_customer.customer_cars:
             print(car)
         print("------------------")
-
+    '''
     show_customer_menu(chosen_customer)
 
 

@@ -1,9 +1,4 @@
-def find_car_model(search):
-    pass
-
-
-def add_car_model(c):
-    pass
+from Data.models import db
 
 
 def find_car_model_by_id(id):
