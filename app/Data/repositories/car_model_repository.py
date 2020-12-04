@@ -1,5 +1,5 @@
-from Data.models import db
+from Data.models.models import CarModel
 
 
 def find_car_model_by_id(id):
-    pass
+    return CarModel.find(**{f'_id': id})  # TODO sökfunktionen funkar ej

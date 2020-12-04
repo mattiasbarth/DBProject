@@ -24,3 +24,7 @@ class Product(Document):
 class Partner(Document):
     collection = db.partners
 
+
+class CarModel(Document):
+    collection = db.car_models
+

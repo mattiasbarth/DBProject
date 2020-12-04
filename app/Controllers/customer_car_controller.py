@@ -1,8 +1,8 @@
 import Data.repositories.customer_car_repository as ccr
 
 
-def add_customer_car(c):
-    added_car = ccr.add_customer_car(c)
+def add_customer_car(customer, c):
+    added_car = ccr.add_customer_car(customer, c)
     return f"{added_car} - tillagd"
 
 

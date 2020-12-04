@@ -18,28 +18,33 @@ def find_customer_by_phone(keyword):
 
 
 def add_business(customer):
-    name, street_address, zip_code, city, phone, email, customer_type, contact_id = customer
+    name, street_address, zip_code, city, phone, email, customer_type_id, contact_id = customer
+    if customer_type_id == 2:
+        customer_type_id = 'Företag'
     customer = Customer({'name': name,
                          'street_address': street_address,
                          'zip_code': zip_code,
                          'city': city,
                          'phone': phone,
                          'email': email,
-                         'customer_type_id': customer_type,
+                         'customer_type_id': customer_type_id,
                          'contact_id': contact_id})
     customer.save()
     return customer
 
 
 def add_private(customer):
-    name, street_address, zip_code, city, phone, email, customer_type = customer
+    name, street_address, zip_code, city, phone, email, customer_type_id = customer
+    if customer_type_id == 1:
+        customer_type_id = 'Privat'
     customer = Customer({'name': name,
                          'street_address': street_address,
                          'zip_code': zip_code,
                          'city': city,
                          'phone': phone,
                          'email': email,
-                         'customer_type_id': customer_type})
+                         'customer_type_id': customer_type_id,
+                        'customer_cars': []})
     customer.save()
     return customer
 

@@ -56,6 +56,11 @@ class Document(dict, ABC):
         return ResultList(cls(item) for item in cls.collection.find(kwargs))
 
     @classmethod
+    def update(cls, item, **kwargs):
+        cls.collection.update_one(item, kwargs)
+        cls.save(item)
+
+    @classmethod
     def remove(cls, **kwargs):
         cls.collection.delete_many(kwargs)
 

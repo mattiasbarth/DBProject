@@ -16,8 +16,8 @@ def add_new_customer():
     city = input("Stad: ")
     phone = input("Telefonnummer: ")
     email = input("Email: ")
-    customer_type = int_input("Kundtyp: ange 1 för privatkund och 2 för företagskund: ")
-    if customer_type == 2:
+    customer_type_id = int_input("Kundtyp: ange 1 för privatkund och 2 för företagskund: ")
+    if customer_type_id == 2:
         while True:
             contact_id = int_input("Kontaktpersonens id: ")
             if not cpc.find_contact_person:
@@ -25,11 +25,11 @@ def add_new_customer():
             else:
                 break
 
-        customer_data = (name, street_address, zip_code, city, phone, email, customer_type, contact_id)
+        customer_data = (name, street_address, zip_code, city, phone, email, customer_type_id, contact_id)
         customer, info_string = cc.add_business(customer_data)
 
     else:
-        customer_data = (name, street_address, zip_code, city, phone, email, customer_type)
+        customer_data = (name, street_address, zip_code, city, phone, email, customer_type_id)
         customer, info_string = cc.add_private(customer_data)
 
     print(info_string)
@@ -37,12 +37,12 @@ def add_new_customer():
 
 
 def show_customer(chosen_customer):
-    '''
+
     print("     KUNDBILD     ")
     print("------------------")
-    print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type)})")
+    print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type_id)})")
 
-    if chosen_customer.contact_person:
+    if hasattr(chosen_customer, 'contact_person'):
         print(f"Kontaktperson {chosen_customer.contact_person}")
         
     print(f"Address: {chosen_customer.street_address}")
@@ -50,20 +50,20 @@ def show_customer(chosen_customer):
     print(f"Email: {chosen_customer.email}")
     print(f"Telefonnummer: {chosen_customer.phone}")
 
-    if chosen_customer.orders:
+    if hasattr(chosen_customer, 'orders'):
         print("------------------")
         print("Ordrar:")
         for order in chosen_customer.orders:
             print(order)
         print("------------------")
 
-    if chosen_customer.customer_cars:
+    if hasattr(chosen_customer, 'customer_cars'):
         print("------------------")
         print("Bilar:")
         for car in chosen_customer.customer_cars:
             print(car)
         print("------------------")
-    '''
+
     show_customer_menu(chosen_customer)
 
 
@@ -88,7 +88,7 @@ def find_customer_menu():
                 print("Det finns ingen kund som uppfyller sökkraven")
 
         elif choice == 2:
-            keyword = int_input("Ange id: ")
+            keyword = input("Ange id: ")
             customers = cc.find_customer_by_id(keyword)
             if customers:
                 choose_customer(customers)
@@ -132,7 +132,7 @@ def choose_customer(customers):
                 else:
                     print("Felaktig inmatning.")
     else:
-      print("Det finns ingen kund som uppfyller sökkraven")
+        print("Det finns ingen kund som uppfyller sökkraven")
                     
 
 def show_customer_menu(chosen_customer):
@@ -152,7 +152,7 @@ def show_customer_menu(chosen_customer):
             edit_customer(chosen_customer)
 
         elif selected == 2:
-            add_customer_car(chosen_customer.id)
+            add_customer_car(chosen_customer)
 
         elif selected == 3:
             remove_car_menu()
@@ -172,7 +172,7 @@ def show_customer_menu(chosen_customer):
             print("Felaktig inmatning")
 
 
-def add_customer_car(customer_id):
+def add_customer_car(customer):
     print("-------------------")
     print("LÄGGA TILL BIL")
     print("Ange uppgifter på den bil du vill lägga till")
@@ -180,15 +180,16 @@ def add_customer_car(customer_id):
     regnr = input("Regnummer: ")
 
     while True:
-        car_model_id = int_input("Bilmodel (id): ")
+        car_model_id = input("Bilmodel (id): ")
         if not cmc.find_car_model_by_id(car_model_id):
             print(f"Hittade ingen bilmodell med id {car_model_id}")
         else:
             break
 
+    car_model_id = 1
     color = input("Bilfärg: ")
-    c = (customer_id, regnr, car_model_id, color)
-    added_string = ccc.add_customer_car(c)
+    c = (regnr, car_model_id, color)
+    added_string = ccc.add_customer_car(customer, c)
     print(added_string)
 
 
@@ -225,14 +226,15 @@ def remove_customer(chosen_customer):
         print("----------------")
         print("TA BORT KUND")
         print(f"Är du säker på att du vill ta bort denna kunden?")
-        print(f"{chosen_customer} ({chosen_customer.id})")
+        print(f"{chosen_customer}")
         print("1. Ja")
         print("2. Nej")
 
         selected = int_input("> ")
 
         if selected == 1:
-            ccc.remove_all_customer_cars(chosen_customer)
+            if hasattr(chosen_customer, 'customer_cars'):
+                ccc.remove_all_customer_cars(chosen_customer)
             cc.remove_customer(chosen_customer)
             removed_string = cc.remove_customer(chosen_customer)
             print(removed_string)
@@ -259,7 +261,7 @@ def edit_customer(chosen_customer):
         print(f"4. Email: {chosen_customer.email}")
         print(f"5. Telefonnummer: {chosen_customer.phone}")
 
-        if chosen_customer.contact_person:
+        if hasattr(chosen_customer, 'contact_person'):
             print(f"6. Konkaktperson: {chosen_customer.contact_person}")
         print(f"7. Avbryt")
         print(f"Vilken rad vill du redigera?")
@@ -272,7 +274,7 @@ def edit_customer(chosen_customer):
             print(changed_string)
 
         elif selected == 2:
-            chosen_customer.name = input("Ange ny address): ")
+            chosen_customer.street_address = input("Ange ny address): ")
             cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
