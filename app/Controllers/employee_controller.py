@@ -6,8 +6,8 @@ def find_employees(search):
 
 
 def add_employee(e):
-    er.add_employee(e)
-    return f"{e.name} - tillagd"
+    new = er.add_employee(e)
+    return f"{new.name} - tillagd"
 
 
 def remove_employee(chosen_employee):

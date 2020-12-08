@@ -25,7 +25,8 @@ class Document(dict, ABC):
         self.__dict__.update(data)
 
     def __repr__(self):
-        return '\n'.join(f'{k} = {v}' for k, v in self.__dict__.items())
+        #return '\n'.join(f'{k} = {v}' for k, v in self.__dict__.items())
+        return self.__dict__["name"]
 
     def save(self):
         if not self._id:
