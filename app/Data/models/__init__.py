@@ -25,8 +25,7 @@ class Document(dict, ABC):
         self.__dict__.update(data)
 
     def __repr__(self):
-        #return '\n'.join(f'{k} = {v}' for k, v in self.__dict__.items())
-        return self.__dict__["name"]
+        return self.__dict__['name']
 
     def save(self):
         if not self._id:
@@ -55,8 +54,25 @@ class Document(dict, ABC):
     def find(cls, **kwargs):
         return ResultList(cls(item) for item in cls.collection.find(kwargs))
 
+    def insert_into_array(self, field_name, new_value):
+        self.collection.update_one({'_id': self._id}, {'$push': {field_name: new_value}})
+
+    def remove_from_array(self, field_name, value):
+        self.collection.update_one({'_id': self._id}, {'$pull': {field_name: value}})
+
     @classmethod
     def remove(cls, **kwargs):
         cls.collection.delete_many(kwargs)
 
 
+class EmbeddedDocument(dict, ABC):
+    repr_data = None
+
+    def __init__(self, data):
+        super().__init__()
+        if '_id' not in data:
+            self._id = None
+        self.__dict__.update(data)
+
+    def __repr__(self):
+        return self.__dict__[self.repr_data]

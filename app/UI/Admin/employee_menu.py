@@ -1,5 +1,6 @@
 import Controllers.employee_controller as ec
 import Controllers.store_controller as sc
+from Data.repositories.store_repository import find_store_by_id
 from UI.tools import int_input
 
 
@@ -69,15 +70,6 @@ def remove_employee(chosen_employee):
             break
         else:
             print("Felaktig inmatning")
-
-
-def find_store(store_id):
-    store = sc.find_store(store_id)
-    print(store)
-    if len(store) == 0:
-        return False
-    else:
-        return True
 
 
 def add_employee():

@@ -1,10 +1,6 @@
-def find_car_model(search):
-    pass
-
-
-def add_car_model(c):
-    pass
+from bson import ObjectId
+from Data.models.models import CarModel
 
 
 def find_car_model_by_id(id):
-    pass
+    return CarModel.find(**{'_id': ObjectId(id)})
