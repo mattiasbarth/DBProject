@@ -24,25 +24,25 @@ def edit_employee(chosen_employee):
             print(changed_string)
 
         elif selected == 2:
-            chosen_employee.name = input("Ange ny butik (Ange butikens id): ")
+            chosen_employee.store = input("Ange ny butik (Ange butikens id): ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
         elif selected == 3:
-            chosen_employee.name = input("Ange nytt telefonnummer: ")
+            chosen_employee.phone = input("Ange nytt telefonnummer: ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
         elif selected == 4:
-            chosen_employee.name = input("Ange ny mail: ")
+            chosen_employee.email = input("Ange ny mail: ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
 
         elif selected == 5:
-            chosen_employee.name = input("Ange ny jobtitel: ")
+            chosen_employee.job_title = input("Ange ny jobtitel: ")
             ec.save_changes(chosen_employee)
             changed_string = ec.save_changes(chosen_employee)
             print(changed_string)
@@ -62,7 +62,6 @@ def remove_employee(chosen_employee):
         print("2. Nej")
         confirm = int_input("> ")
         if confirm == 1:
-            ec.remove_employee(chosen_employee)
             removed_string = ec.remove_employee(chosen_employee)
             print(removed_string)
             break
@@ -73,21 +72,13 @@ def remove_employee(chosen_employee):
             print("Felaktig inmatning")
 
 
-def find_store(store_id):
-    store = sc.find_store_by_id(store_id)
-    if len(store) == 0:
-        return False
-    else:
-        return True
-
-
 def add_employee():
     print("-------------------")
     print("LÄGGA TILL ANSTÄLLD")
     print("Ange uppgifter på den anställda du vill lägga till")
     while True:
         e_store = input("Butiks id: ")
-        if not find_store(e_store):
+        if len(sc.find_store_by_id(e_store)) == 0:
             print(f"Hittade ingen butik med id {e_store}")
         else:
             break
@@ -96,7 +87,8 @@ def add_employee():
     e_email = input("Email: ")
     e_job_title = input("Job title: ")
     e = (e_store, e_name, e_phone, e_email, e_job_title)
-    ec.add_employee(e)
+    added_string = ec.add_employee(e)
+    print(added_string)
 
 
 def edit_remove_menu(chosen_employee):
@@ -110,6 +102,7 @@ def edit_remove_menu(chosen_employee):
             edit_employee(chosen_employee)
         elif selected == 2:
             remove_employee(chosen_employee)
+            break
         elif selected == 3:
             break
         else:
@@ -157,3 +150,6 @@ def employees_menu():
             break
         else:
             print("Felaktig inmatning")
+
+
+employees_menu()
