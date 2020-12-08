@@ -11,10 +11,10 @@ def add_customer_car(customer, c):
     return new_car
 
 
-def find_customer_car(regnr):
+def find_customer_car(_, regnr):
     return session.query(CustomerCar).filter(CustomerCar.regnr.like(f'%{regnr}%')).first()
 
 
-def remove_customer_car(car):
+def remove_customer_car(_, car):
     session.delete(car)
     session.commit()

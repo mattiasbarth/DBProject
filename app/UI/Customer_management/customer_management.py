@@ -18,19 +18,18 @@ def add_new_customer():
     email = input("Email: ")
     customer_type_id = int_input("Kundtyp: ange 1 för privatkund och 2 för företagskund: ")
     if customer_type_id == 2:
-        while True:
-            contact_id = int_input("Kontaktpersonens id: ")
-            if not cpc.find_contact_person:
-                print(f"Hittade ingen kontaktperson med id {contact_id}")
-            else:
-                break
+        print("Fyll i följande uppgifter om kontaktpersonen:")
+        cp_name = input("Kontaktpersonens namn: ")
+        cp_phone = input("Kontaktpersonens telefonnummer: ")
+        cp_email = input("Kontaktpersonens email:")
+        contact_person = cp_name, cp_phone, cp_email
 
-        customer_data = (name, street_address, zip_code, city, phone, email, customer_type_id, contact_id)
-        customer, info_string = cc.add_business(customer_data)
+        customer = (name, street_address, zip_code, city, phone, email, customer_type_id)
+        customer, info_string = cc.add_business(customer, contact_person)
 
     else:
-        customer_data = (name, street_address, zip_code, city, phone, email, customer_type_id)
-        customer, info_string = cc.add_private(customer_data)
+        customer = (name, street_address, zip_code, city, phone, email, customer_type_id)
+        customer, info_string = cc.add_private(customer)
 
     print(info_string)
     show_customer(customer)
@@ -40,7 +39,7 @@ def show_customer(chosen_customer):
 
     print("     KUNDBILD     ")
     print("------------------")
-    print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type_id)})")
+    print(f"Namn: {chosen_customer.name} ({str(chosen_customer.customer_type)})")
 
     if hasattr(chosen_customer, 'contact_person'):
         print(f"Kontaktperson {chosen_customer.contact_person}")
@@ -155,7 +154,7 @@ def show_customer_menu(chosen_customer):
             add_customer_car(chosen_customer)
 
         elif selected == 3:
-            remove_car_menu()
+            remove_car_menu(chosen_customer)
             pass
 
         elif selected == 4:
@@ -186,31 +185,29 @@ def add_customer_car(customer):
         else:
             break
 
-    car_model_id = 1
     color = input("Bilfärg: ")
     c = (regnr, car_model_id, color)
     added_string = ccc.add_customer_car(customer, c)
     print(added_string)
 
 
-def remove_car_menu():
+def remove_car_menu(customer):
 
     print("Ange regnummret på den bil du vill ta bort")
 
     while True:
         regnr = input("> ")
-        found_car = ccc.find_customer_car(regnr)
+        found_car = ccc.find_customer_car(customer, regnr)
 
         if found_car:
             print(f"Är du säker på att du vill ta bort denna bil?")
-            print(f"Modell: {found_car.car_model} | Regnummer: {found_car.regnr} | Ägare: {found_car.customer}")
+            #print(f"Modell: {found_car.car_model} | Regnummer: {found_car.regnr} | Ägare: {found_car.customer}")  #TODO funkar bara om customer_car är ett objekt
             print("1. Ja")
             print("2. Nej")
             selected = int_input("> ")
 
             if selected == 1:
-                ccc.remove_customer_car(found_car)
-                removed_string = ccc.remove_customer_car(found_car)
+                removed_string = ccc.remove_customer_car(customer, found_car)
                 print(removed_string)
                 break
 
@@ -218,7 +215,7 @@ def remove_car_menu():
                 break
 
         else:
-            print(f"Hittade ingen bil med id {regnr}")
+            print(f"Hittade ingen bil med registreringsnummer {regnr}")
             
 
 def remove_customer(chosen_customer):
@@ -235,7 +232,6 @@ def remove_customer(chosen_customer):
         if selected == 1:
             if hasattr(chosen_customer, 'customer_cars'):
                 ccc.remove_all_customer_cars(chosen_customer)
-            cc.remove_customer(chosen_customer)
             removed_string = cc.remove_customer(chosen_customer)
             print(removed_string)
             break

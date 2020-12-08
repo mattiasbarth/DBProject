@@ -1,4 +1,6 @@
+from bson import ObjectId
 from Data.models.models import Store
+import re
 
 
 def store_changes(store):
@@ -6,11 +8,16 @@ def store_changes(store):
 
 
 def find_store(keyword):
-    return Store.find(**{'name': keyword})
+    query_str = re.compile(f'.*{keyword}.*', re.IGNORECASE)
+    return Store.find(**{'name': query_str})
+
+
+def find_store_by_id(id):
+    return Store.find(**{'_id': ObjectId(id)})
 
 
 def remove_store(store):
-    Store.remove(**store)
+    Store.remove(_id=store._id)
 
 
 def add_store(store):

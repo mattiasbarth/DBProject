@@ -10,6 +10,10 @@ def find_store(keyword):
     return sr.find_store(keyword)
 
 
+def find_store_by_id(id):
+    return sr.find_store_by_id(id)
+
+
 def remove_store(store):
     return sr.remove_store(store)
 

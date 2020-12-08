@@ -1,5 +1,6 @@
 import Controllers.employee_controller as ec
 import Controllers.store_controller as sc
+from Data.repositories.store_repository import find_store_by_id
 from UI.tools import int_input
 
 
@@ -73,7 +74,7 @@ def remove_employee(chosen_employee):
 
 
 def find_store(store_id):
-    store = sc.find_store(store_id)
+    store = sc.find_store_by_id(store_id)
     if len(store) == 0:
         return False
     else:
@@ -85,7 +86,7 @@ def add_employee():
     print("LÄGGA TILL ANSTÄLLD")
     print("Ange uppgifter på den anställda du vill lägga till")
     while True:
-        e_store = int_input("Butiks id: ")
+        e_store = input("Butiks id: ")
         if not find_store(e_store):
             print(f"Hittade ingen butik med id {e_store}")
         else:

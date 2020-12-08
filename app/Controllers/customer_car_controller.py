@@ -6,12 +6,12 @@ def add_customer_car(customer, c):
     return f"{added_car} - tillagd"
 
 
-def find_customer_car(regnr):
-    return ccr.find_customer_car(regnr)
+def find_customer_car(customer, regnr):
+    return ccr.find_customer_car(customer, regnr)
 
 
-def remove_customer_car(car):
-    ccr.remove_customer_car(car)
+def remove_customer_car(customer, car):
+    ccr.remove_customer_car(customer, car)
     return f"{car} - borttagen"
 
 

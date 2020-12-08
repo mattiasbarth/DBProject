@@ -10,6 +10,10 @@ def find_store(keyword):
     return session.query(Store).filter(Store.name.like(f'%{keyword}%')).all()
 
 
+def find_store_by_id(id):
+    return session.query(Store).filter(Store.id == id).first()
+
+
 def remove_store(store):
     if not store.employees:
         session.delete(store)

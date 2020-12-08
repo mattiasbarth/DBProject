@@ -18,8 +18,8 @@ def find_customer_by_phone(keyword):
     return cr.find_customer_by_phone(keyword)
 
 
-def add_business(customer):
-    return cr.add_business(customer), f"{customer} har blivit tillagd som kund."
+def add_business(customer, contact_person):
+    return cr.add_business(customer, contact_person), f"{customer} har blivit tillagd som kund."
 
 
 def add_private(customer):

@@ -1,4 +1,4 @@
-from Data.models import Document, db
+from Data.models import Document, db, EmbeddedDocument
 
 
 class Customer(Document):
@@ -27,4 +27,8 @@ class Partner(Document):
 
 class CarModel(Document):
     collection = db.car_models
+
+
+class CustomerCar(EmbeddedDocument):
+    repr_data = 'regnr'
 
