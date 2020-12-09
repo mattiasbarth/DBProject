@@ -1,19 +1,21 @@
-from Data.db import session
-from Data.models.customer_car import CustomerCar
+from Data.models.models import CustomerCar
 
 
-def add_customer_car(c):
-    customer_id, regnr, car_model_id, color = c
-    new_car = CustomerCar(customer_id=customer_id, regnr=regnr, car_model_id=car_model_id, color=color)
-    session.add(new_car)
-    session.commit()
-    return new_car
+def add_customer_car(customer, car):  #TODO fungerar ej
+    regnr, car_model_id, color = car
+    new = CustomerCar({'regnr': regnr, 'car_model_id': car_model_id, 'color': color})
+    customer.insert_into_array('customer_cars', new)
+    return(new)
 
 
-def find_customer_car(regnr):
-    return session.query(CustomerCar).filter(CustomerCar.regnr.like(f'%{regnr}%')).first()
+def find_customer_car(customer, regnr):
+    for car in customer.customer_cars:
+        if car['regnr'] == regnr:
+            return car
+        else:
+            continue
+    return None
 
 
-def remove_customer_car(car):
-    session.delete(car)
-    session.commit()
+def remove_customer_car(customer, car):
+    customer.remove_from_array('customer_cars', car)
