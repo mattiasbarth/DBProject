@@ -9,16 +9,13 @@ def create(
     status,  # TODO: Pass as argument or set default?
     comment='',
 ):
-    try:
-        return order_repository.create(
+    return order_repository.create(
             customer_id=customer_id,
             employee_id=employee_id,
             store_id=store_id,
             status=status,
             comment=comment,
         )
-    except Exception as e:
-        return None
 
 
 def edit(order):

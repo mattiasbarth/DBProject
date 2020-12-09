@@ -9,10 +9,23 @@ from Data.db import session
 def create(**kwargs):
     # TODO: Use default in model
     kwargs['date_created'] = dt.datetime.utcnow()
-    order = Order(**kwargs)  # TODO: Check if order could be created
-    session.add(order)
-    session.commit()
+    try:
+        order = Order(**kwargs)  # TODO: Check if order could be created
+    except Exception:
+        return None
+    try:
+        session.add(order)
+    except Exception as e:
+        print(repr(e))
+        return None
+    try:
+        session.commit()
+    except Exception as e:
+        print(repr(e))
+        session.rollback()
+        return None
     return order
+
 
 
 def edit(order: Order) -> Optional[Order]:

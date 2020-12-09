@@ -1,6 +1,7 @@
 import Controllers.car_model_controller as cmc
 import Controllers.contact_person_controller as cpc
 import Controllers.customer_car_controller as ccc
+import Controllers.customer_controller as cc
 from UI.tools import int_input
 
 
@@ -19,7 +20,7 @@ def add_new_customer():
     if customer_type == 2:
         while True:
             contact_id = int_input("Kontaktpersonens id: ")
-            if not ccp.find_contact_person:
+            if not cpc.find_contact_person:
                 print(f"Hittade ingen kontaktperson med id {contact_id}")
             else:
                 break
@@ -42,7 +43,7 @@ def show_customer(chosen_customer):
 
     if chosen_customer.contact_person:
         print(f"Kontaktperson {chosen_customer.contact_person}")
-        
+
     print(f"Address: {chosen_customer.street_address}")
     print(f"Postkod: {chosen_customer.zip_code}")
     print(f"Email: {chosen_customer.email}")
@@ -131,7 +132,7 @@ def choose_customer(customers):
                     print("Felaktig inmatning.")
     else:
       print("Det finns ingen kund som uppfyller sökkraven")
-                    
+
 
 def show_customer_menu(chosen_customer):
     while True:
@@ -216,7 +217,7 @@ def remove_car_menu():
 
         else:
             print(f"Hittade ingen bil med id {regnr}")
-            
+
 
 def remove_customer(chosen_customer):
     while True:
