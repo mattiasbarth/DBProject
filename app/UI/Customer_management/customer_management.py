@@ -133,13 +133,8 @@ def choose_customer(customers):
                 else:
                     print("Felaktig inmatning.")
     else:
-<<<<<<< HEAD
-      print("Det finns ingen kund som uppfyller sökkraven")
-
-=======
         print("Det finns ingen kund som uppfyller sökkraven")
 
->>>>>>> e1eb86c39f77b96ffb79cb450d10195ef0bfbbe2
 
 def show_customer_menu(chosen_customer):
     while True:
@@ -162,7 +157,6 @@ def show_customer_menu(chosen_customer):
 
         elif selected == 3:
             remove_car_menu(chosen_customer)
-            pass
 
         elif selected == 4:
             place_order()
@@ -222,13 +216,8 @@ def remove_car_menu(customer):
                 break
 
         else:
-<<<<<<< HEAD
-            print(f"Hittade ingen bil med id {regnr}")
-
-=======
             print(f"Hittade ingen bil med registreringsnummer {regnr}")
 
->>>>>>> e1eb86c39f77b96ffb79cb450d10195ef0bfbbe2
 
 def remove_customer(chosen_customer):
     while True:
