@@ -30,7 +30,6 @@ def create(**kwargs):
 
 def edit(order: Order) -> Optional[Order]:
     try:
-        session.add(order)
         session.commit()
         return order
     except Exception:
